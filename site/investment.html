@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styles.css"/>
     <title>OCBC - Your Investment Journey</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -77,34 +77,40 @@
                     <p>Putting aside some of your money into assets like unit trusts, stocks and bonds will have you realise your financial goals sooner as the expectation is that the value of these assets will increase at a faster rate over time than your savings account (Figure 1).</p>
                 </div>
 
-                <div class="question-section">
-                    <div class="question-header">
-                        <h2>Question 1 of 8</h2>
-                        <span class="expand-icon">v</span>
-                    </div>
-                    
-                    <div class="question-content">
-                        <h3>1. What is investing?</h3>
-                        <p>Select one answer</p>
-                        
-                        <div class="options">
-                            <label class="option">
-                                <input type="radio" name="q1" value="1">
-                                <span>Storing money in a key area</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q1" value="2">
-                                <span>Putting money elsewhere and</span>
-                            </label>
-                            <label class="option">
-                                <input type="radio" name="q1" value="3">
-                                <span>Losing money</span>
-                            </label>
+                <div class="read-btn-container">
+                    <button class="read-btn" onclick="showQuiz()">Completed Reading</button>
+                </div>
+            
+                <section id="question-section">
+                    <div class="question-container">
+                        <div class="question-header">
+                            <h2>Question 1 of 8</h2>
+                            <span class="expand-icon">v</span>
                         </div>
                         
-                        <button class="submit-btn">Submit</button>
+                        <div class="question-content">
+                            <h3>1. What is investing?</h3>
+                            <p>Select one answer</p>
+                            
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q1" value="1">
+                                    <span>Storing money in a key area</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="2">
+                                    <span>Putting money elsewhere and</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="3">
+                                    <span>Losing money</span>
+                                </label>
+                            </div>
+                            
+                            <button class="submit-btn">Submit</button>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
         </section>
     </main>
@@ -148,5 +154,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
