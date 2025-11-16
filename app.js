@@ -22,6 +22,21 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'login.html'));
 });
 
+// Serve signup page
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'signup.html'));
+});
+
+// Serve dashboard page
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'dashboard.html'));
+});
+
+// Serve transfer page
+app.get('/transfer', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'transfer.html'));
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

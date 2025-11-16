@@ -13,13 +13,13 @@ body {
     min-height: 100vh;
 }
 
-.login-container {
+.signup-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     padding: 20px;
 }
 
-.login-box {
+.signup-box {
     background: white;
     padding: 40px;
     border-radius: 8px;
@@ -64,7 +64,7 @@ input:focus {
     border-color: #ED1C24;
 }
 
-.login-btn {
+.signup-btn {
     width: 100%;
     background-color: #ED1C24;
     color: white;
@@ -77,11 +77,11 @@ input:focus {
     margin-top: 10px;
 }
 
-.login-btn:hover {
+.signup-btn:hover {
     background-color: #c91219;
 }
 
-.login-btn:disabled {
+.signup-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
@@ -89,51 +89,37 @@ input:focus {
 .links {
     text-align: center;
     margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
+}
+
+.links p {
+    color: #666;
+    font-size: 14px;
 }
 
 .links a {
     color: #ED1C24;
     text-decoration: none;
-    font-size: 14px;
 }
 
 .links a:hover {
     text-decoration: underline;
 }
 
-.signup-link {
-    text-align: center;
-    margin-top: 20px;
+.message {
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: none;
 }
 
-.signup-link p {
-    color: #666;
-    font-size: 14px;
+.message.error {
+    background-color: #fee;
+    color: #c00;
+    border: 1px solid #fcc;
 }
 
-.signup-link a {
-    color: #ED1C24;
-    text-decoration: none;
-}
-
-.signup-link a:hover {
-    text-decoration: underline;
-}
-
-.test-btn {
-    width: 100%;
-    background-color: #666;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 15px;
-}
-
-.test-btn:hover {
-    background-color: #555;
+.message.success {
+    background-color: #efe;
+    color: #0a0;
+    border: 1px solid #cfc;
 }

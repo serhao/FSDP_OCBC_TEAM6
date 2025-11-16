@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCBC Dashboard</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>OCBC Bank Dashboard</h1>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+        </header>
+        
+        <div class="dashboard-content">
+            <div class="balance-card">
+                <h2>Account Balance</h2>
+                <p class="balance-amount" id="balance">$0.00</p>
+                <p class="account-info">Access Code: <span id="access-code">-</span></p>
+            </div>
+            
+            <div class="actions">
+                <button id="transfer-btn" class="action-btn">Transfer Money</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="../javascript/dashboard.js"></script>
+</body>
+</html>

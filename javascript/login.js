@@ -1,5 +1,6 @@
-import { auth } from './firebase-config.js';
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth, db } from './firebase-config.js';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Handle login form submission
 document.getElementById('login-form').addEventListener('submit', async (e) => {
@@ -28,7 +29,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         sessionStorage.setItem('userId', user.uid);
         
         // Redirect to dashboard or home page
-        window.location.href = 'dashboard.html';
+        window.location.href = '/dashboard';
         
     } catch (error) {
         console.error('Login error:', error);
@@ -88,3 +89,38 @@ function showError(message) {
         errorDiv.style.display = 'none';
     }, 5000);
 }
+
+// TEST ONLY - Create test account
+document.getElementById('create-test-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('create-test-btn');
+    btn.disabled = true;
+    btn.textContent = 'Creating...';
+    
+    try {
+        const email = '676767@ocbc.bank';
+        const password = '676767';
+        
+        // Create user in Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Create user document in Firestore
+        await setDoc(doc(db, 'users', user.uid), {
+            email: email,
+            username: 'Infinite Money',
+            phone: '99999999',
+            balance: 100000
+        });
+        
+        alert('Test account created! Access Code: 676767, PIN: 676767');
+        btn.textContent = 'Account Created!';
+    } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+            alert('Test account already exists! Use Access Code: 676767, PIN: 676767');
+        } else {
+            alert('Error: ' + error.message);
+        }
+        btn.disabled = false;
+        btn.textContent = 'Create Test Account (676767)';
+    }
+});

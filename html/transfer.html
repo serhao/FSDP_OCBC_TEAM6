@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Money - OCBC</title>
+    <link rel="stylesheet" href="../css/transfer.css">
+</head>
+<body>
+    <div class="transfer-container">
+        <header>
+            <h1>Transfer Money</h1>
+            <button id="back-btn" class="back-btn">Back to Dashboard</button>
+        </header>
+        
+        <div class="transfer-content">
+            <div class="balance-display">
+                <p>Your Balance: <span id="current-balance">$0.00</span></p>
+            </div>
+            
+            <form id="transfer-form">
+                <div class="form-group">
+                    <label for="recipient">Recipient (Phone Number)</label>
+                    <input 
+                        type="text" 
+                        id="recipient" 
+                        name="recipient" 
+                        required
+                        placeholder="Enter access code or phone number"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Amount ($)</label>
+                    <input 
+                        type="number" 
+                        id="amount" 
+                        name="amount" 
+                        min="0.01"
+                        step="0.01"
+                        required
+                        placeholder="0.00"
+                    >
+                </div>
+                
+                <button type="submit" id="transfer-submit-btn" class="transfer-btn">Transfer</button>
+            </form>
+        </div>
+    </div>
+    
+    <script type="module" src="../javascript/transfer.js"></script>
+</body>
+</html>
