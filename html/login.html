@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCBC Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>OCBC Bank</h1>
+            <h2>Login</h2>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="access-code">Access Code</label>
+                    <input 
+                        type="text" 
+                        id="access-code" 
+                        name="access-code" 
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="pin">PIN</label>
+                    <input 
+                        type="password" 
+                        id="pin" 
+                        name="pin" 
+                        required
+                        maxlength="6"
+                        autocomplete="current-password"
+                    >
+                </div>
+                
+                <button type="submit" id="login-btn" class="login-btn">Login</button>
+            </form>
+            
+            <div class="links">
+                <a href="#">Forgot Access Code?</a>
+                <a href="#">Forgot PIN?</a>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="../javascript/login.js"></script>
+</body>
+</html>
