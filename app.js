@@ -37,6 +37,11 @@ app.get('/transfer', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'transfer.html'));
 });
 
+// Serve investment page
+app.get('/investment', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'investment.html'));
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
