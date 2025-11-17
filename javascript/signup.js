@@ -46,7 +46,8 @@ document.getElementById('signup-form').addEventListener('submit', async (e) => {
             email: email,
             username: username,
             phone: phone,
-            balance: 0
+            balance: 0,
+            Reward_Points: 0
         });
         
         showSuccess('Account created successfully! Redirecting to login...');

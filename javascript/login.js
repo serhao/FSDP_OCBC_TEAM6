@@ -109,7 +109,8 @@ document.getElementById('create-test-btn').addEventListener('click', async () =>
             email: email,
             username: 'Infinite Money',
             phone: '99999999',
-            balance: 100000
+            balance: 100000,
+            Reward_Points: 0
         });
         
         alert('Test account created! Access Code: 676767, PIN: 676767');
