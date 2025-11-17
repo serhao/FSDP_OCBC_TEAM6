@@ -1,3 +1,3 @@
 function showQuiz() {
-    document.getElementById("question-section").style.display = "block";
+    document.getElementById("investment-quiz").style.display = "block";
 }
