@@ -47,6 +47,11 @@ document.getElementById('transfer-btn').addEventListener('click', () => {
     window.location.href = '/transfer';
 });
 
+// Investments button
+document.getElementById('investments-btn').addEventListener('click', () => {
+    window.location.href = '/investments';
+});
+
 // Logout button
 document.getElementById('logout-btn').addEventListener('click', async () => {
     try {

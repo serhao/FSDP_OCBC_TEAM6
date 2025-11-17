@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCBC Investments</title>
+    <link rel="stylesheet" href="../css/investments.css">
+</head>
+<body>
+    <div class="investments-container">
+        <header>
+            <h1>OCBC Investments</h1>
+            <button id="back-dashboard-btn" class="back-btn">Back to Dashboard</button>
+        </header>
+        
+        <div class="investments-content">
+            <div class="portfolio-summary">
+                <h2>Your Portfolio</h2>
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <p class="label">Total Investment Value</p>
+                        <p class="value" id="total-investment">$0.00</p>
+                    </div>
+                    <div class="summary-card">
+                        <p class="label">Available Cash</p>
+                        <p class="value" id="available-cash">$0.00</p>
+                    </div>
+                    <div class="summary-card">
+                        <p class="label">Total Returns</p>
+                        <p class="value returns" id="total-returns">$0.00 (0%)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="holdings-section" id="holdings-section">
+                <h3>Your Holdings</h3>
+                <div id="holdings-list"></div>
+            </div>
+
+            <div class="available-funds">
+                <h3>Available Funds</h3>
+                <div class="funds-grid" id="funds-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Investment Modal -->
+    <div id="investment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-fund-name"></h2>
+            <p id="modal-fund-description"></p>
+            <div class="fund-details">
+                <p><strong>Current Price:</strong> $<span id="modal-fund-price"></span></p>
+                <p><strong>1Y Return:</strong> <span id="modal-fund-return"></span>%</p>
+                <p><strong>Risk Level:</strong> <span id="modal-fund-risk"></span></p>
+            </div>
+            <form id="invest-form">
+                <div class="form-group">
+                    <label for="invest-amount">Investment Amount ($)</label>
+                    <input type="number" id="invest-amount" min="100" step="0.01" required>
+                </div>
+                <button type="submit" id="invest-btn" class="invest-btn">Invest Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="../javascript/investments.js"></script>
+</body>
+</html>

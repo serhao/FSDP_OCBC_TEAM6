@@ -37,6 +37,11 @@ app.get('/transfer', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'transfer.html'));
 });
 
+// Serve investments simulation page
+app.get('/investments', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'investments.html'));
+});
+
 // Serve investment page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'investment-learn-article.html'));
