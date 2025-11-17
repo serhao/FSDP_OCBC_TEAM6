@@ -29,7 +29,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         sessionStorage.setItem('userId', user.uid);
         
         // Redirect to dashboard or home page
-        window.location.href = '/dashboard';
+        window.location.href = '/html/dashboard.html';
         
     } catch (error) {
         console.error('Login error:', error);

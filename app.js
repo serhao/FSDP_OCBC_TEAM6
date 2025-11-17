@@ -18,7 +18,7 @@ app.use('/html', express.static(path.join(__dirname, 'html')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Serve login page
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'login.html'));
 });
 
@@ -38,8 +38,8 @@ app.get('/transfer', (req, res) => {
 });
 
 // Serve investment page
-app.get('/investment', (req, res) => {
-    res.sendFile(path.join(__dirname, 'html', 'investment.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'investment-learn-article.html'));
 });
 
 // Start server
