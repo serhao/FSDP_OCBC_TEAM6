@@ -1,6 +1,21 @@
 import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+async function applyPendingRewards(userId) {
+    const pending = Number(sessionStorage.getItem("pendingRewards") || 0);
+
+    if (pending > 0) {
+        const userRef = doc(db, "users", userId);
+
+        await updateDoc(userRef, {
+            Reward_Points: increment(pending)
+        });
+
+        console.log(`Applied ${pending} pending reward points to ${userId}`);
+
+    }
+}
 
 // Handle login form submission
 document.getElementById('login-form').addEventListener('submit', async (e) => {
@@ -26,7 +41,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         
         // Store user info in session
         sessionStorage.setItem('userAccessCode', accessCode);
-        sessionStorage.setItem('userId', user.uid);
+        sessionStorage.setItem('userId', user.Reward_Points);
+
+        await applyPendingRewards(user.uid);
         
         // Redirect to dashboard or home page
         window.location.href = '/html/dashboard.html';

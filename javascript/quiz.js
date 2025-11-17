@@ -101,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** Generates and displays the final results screen. */
     function displayFinalResults() {
+        sessionStorage.setItem("pendingRewards", score >= 4 ? score : 0);
+
         const resultsHTML = `
             <section class="final-results-container quiz-container">
                 <div class="quiz-header" style="justify-content: center;">
