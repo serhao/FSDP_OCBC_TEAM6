@@ -109,7 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="quiz-body" style="text-align: center;">
                     <h2>Your Score:</h2>
                     <p class="score-display">${String(score).padStart(2, '0')}/${String(totalQuestions).padStart(2, '0')}</p>
-                    
+
+                    <div>
+                        <p>You have earn ${score >= 4 ? score : 0} of OCBC reward points!</p>
+                        <p>Login to claim your reward points or sigun up if you are not an OCBC member yet!</p>
+                    </div>
+
                     <button class="restart-button">
                         <span class="restart-icon">↻</span> Restart Quiz
                     </button>

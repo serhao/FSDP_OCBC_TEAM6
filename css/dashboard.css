@@ -98,3 +98,30 @@ h1 {
 .action-btn:hover {
     background-color: #c91219;
 }
+
+
+/* rewards points */
+#rewards-container {
+    background-color: white;
+    padding: 30px;
+    height: auto;
+    width: 500px;
+    align-items: center;
+    margin: 20px auto 20px auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.rewards-content {
+    text-align: center;
+    background: #f9f9f9;
+    height: auto;
+    padding: 20px;
+}
+
+.rewards-amt {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ED1C24;
+    margin-bottom: 10px;
+}

@@ -27,13 +27,18 @@ async function loadUserData(userId) {
             const userData = userDoc.data();
             const balance = userData.balance || 0;
             document.getElementById('balance').textContent = `$${balance.toFixed(2)}`;
+
+            const rewards = userData.Reward_Points || 0;
+            document.getElementById("rewards").textContent = rewards;
         } else {
             // User doesn't have a Firestore document yet
             document.getElementById('balance').textContent = '$0.00';
+            document.getElementById('rewards').textContent = '0';
         }
     } catch (error) {
         console.error('Error loading user data:', error);
         document.getElementById('balance').textContent = 'Error loading balance';
+        document.getElementById("rewards").textContent = "Error loading rewards";
     }
 }
 
