@@ -54,7 +54,7 @@ document.getElementById('signup-form').addEventListener('submit', async (e) => {
         
         // Redirect to login after 2 seconds
         setTimeout(() => {
-            window.location.href = '/';
+            window.location.href = '/html/login.html';
         }, 2000);
         
     } catch (error) {
