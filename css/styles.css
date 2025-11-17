@@ -301,6 +301,398 @@ body {
     background-color: #d01820;
 }
 
+/* INVESTMENTS>LEARN>ARTICLE Page */
+/* --- Main Content Wrapper for Centering --- */
+.content-wrapper {
+    max-width: 900px; 
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- Article Hero Section (Top Banner) --- */
+.article-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 40px;
+}
+
+.hero-text {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.article-hero h2 {
+    font-size: 2.5em;
+    color: #333;
+    margin-top: 0;
+}
+
+.article-meta {
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.hero-image {
+    max-width: 300px; 
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* --- Article Body --- */
+.article-body p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.key-quote {
+    background-color: #f7f7f7; 
+    border-left: 5px solid #ED1C24;
+    padding: 20px;
+    margin: 30px 0;
+    font-style: italic;
+    line-height: 1.7;
+    color: #555;
+}
+
+.completed-reading-tag {
+    display: inline-block;
+    background-color: #ED1C24;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+/* --- Quiz Section: Container & Header --- */
+.quiz-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0;
+    overflow: hidden; 
+}
+
+.quiz-header {
+    background-color: #ED1C24;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.quiz-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.quiz-number {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.quiz-body {
+    padding: 20px;
+}
+
+.quiz-body h4 {
+    margin-top: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* --- Quiz Section: Options and Custom Buttons --- */
+.quiz-option {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 12px 20px 12px 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.quiz-option:hover {
+    border-color: #ED1C24;
+    background-color: #f9f9f9;
+}
+
+.quiz-option input[type="radio"] {
+    opacity: 0; 
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    left: -9999px;
+}
+
+.quiz-option .option-text {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+}
+
+/* Custom Radio Button: Outer Circle (::before) */
+.quiz-option .option-text::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #999;
+    border-radius: 50%;
+    background-color: white;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+/* Custom Radio Button: Inner Dot (::after) */
+.quiz-option .option-text::after {
+    content: '';
+    position: absolute;
+    left: -24px; 
+    width: 8px; 
+    height: 8px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+/* Checked State: Selected option styling */
+.quiz-option input[type="radio"]:checked + .option-text::before {
+    border-color: #ED1C24;
+    background-color: #ED1C24;
+}
+
+.quiz-option input[type="radio"]:checked + .option-text::after {
+    background: white;
+}
+
+.quiz-option input[type="radio"]:checked + .option-text {
+    font-weight: bold;
+}
+
+/* --- Submit Button --- */
+.submit-button {
+    background-color: #ED1C24;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.submit-button:hover {
+    background-color: #d01820;
+}
+
+/* --- Quiz Interactivity States (Post-Submission) --- */
+/* Correct Answer Highlight */
+.quiz-option.is-correct {
+    background-color: #ED1C24;
+    color: white;
+    border-color: #ED1C24;
+}
+
+/* Correct Answer: White Checkbox with Red Dot */
+.quiz-option.is-correct .option-text::before {
+    border-color: white; 
+    background-color: white;
+}
+
+.quiz-option.is-correct .option-text::after {
+    background-color: #ED1C24;
+}
+
+/* Incorrect Answer Highlight (User's selection) */
+.quiz-option.is-incorrect {
+    border-color: #ED1C24; 
+    background-color: #fce7e7;
+    color: #ED1C24;
+}
+
+.quiz-option.is-incorrect .option-text::before {
+    border-color: #ED1C24;
+    background-color: white;
+}
+
+.quiz-option.is-incorrect .option-text::after {
+    background: transparent;
+}
+
+.quiz-option.is-correct input[type="radio"] + .option-text::after {
+    background: transparent; 
+}
+
+/* --- Feedback Box Styling --- */
+.feedback-box {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ddd;
+    transition: all 0.5s ease-in-out;
+}
+
+/* Feedback Box Icon: Correct State */
+.feedback-box:not(.incorrect) .feedback-icon {
+    background-color: #28a745;
+}
+.feedback-box:not(.incorrect) .feedback-icon::after {
+    content: "✓"; 
+}
+
+
+.feedback-box.incorrect {
+    background-color: #fff;
+    border-color: #ED1C24;
+}
+
+.feedback-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.feedback-box.incorrect .feedback-icon {
+    background-color: #ED1C24;
+}
+
+.feedback-icon::after {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.feedback-box.incorrect .feedback-icon::after {
+    content: "×"; 
+}
+
+.feedback-content {
+    max-width: 600px;
+}
+
+.feedback-content h4 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feedback-box.incorrect #feedback-title {
+    color: #ED1C24;
+    font-weight: 700;
+}
+
+.next-button {
+    background-color: #f17822;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.next-button:hover {
+    background-color: #e06815;
+}
+
+/* --- Final Quiz Results Styling --- */
+.score-display {
+    font-size: 4em;
+    font-weight: 700;
+    color: #ED1C24;
+    margin: 20px 0;
+}
+
+.final-results-container .quiz-body {
+    padding: 40px;
+}
+
+.restart-button {
+    background-color: #f17822;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 30px;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.restart-button:hover {
+    background-color: #e06815;
+}
+
+.restart-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+    line-height: 1;
+}
+
+.final-results-container {
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    margin: 0; 
+    overflow: hidden; 
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .article-hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .hero-text {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .hero-image {
+        max-width: 100%;
+    }
+
+    .article-hero h2 {
+        font-size: 1.8em;
+    }
+}
+
 /* Footer */
 footer {
     background-color: #f8f9fa;
@@ -433,4 +825,10 @@ footer {
     .footer-columns {
         grid-template-columns: 1fr;
     }
+}
+
+/* --- ESSENTIAL: Visibility Control for JavaScript Flow --- */
+/* this stays at the very bottom of this file */
+.hidden {
+    display: none !important;
 }
