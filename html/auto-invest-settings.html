@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Investment Settings - OCBC Bank</title>
+    <link rel="stylesheet" href="/css/auto-invest-settings.css">
+</head>
+<body>
+    <div class="header">
+        <div class="red-bar">
+            <img src="https://www.ocbc.com/iwov-resources/sg/ocbc/personal/images/brand/logo.png" alt="OCBC Logo" class="logo">
+            <nav class="nav-menu">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/transfer">Transfer</a>
+                <a href="/investments">Investments</a>
+                <a href="/auto-invest-settings" class="active">Auto-Invest</a>
+            </nav>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Auto-Investment Settings</h1>
+        <p class="description">Configure automatic investments when receiving transfers from specific contacts. A percentage of incoming transfers will be automatically invested in your chosen fund.</p>
+
+        <!-- Add New Rule Form -->
+        <div class="add-rule-section">
+            <h2>Add New Rule</h2>
+            <form id="add-rule-form">
+                <div class="form-group">
+                    <label for="source-phone">Source Phone Number</label>
+                    <input type="tel" id="source-phone" placeholder="+65 9123 4567" required>
+                    <span class="helper-text">Phone number of sender to trigger auto-investment</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="percentage">Investment Percentage</label>
+                    <input type="number" id="percentage" min="1" max="100" placeholder="25" required>
+                    <span class="helper-text">Percentage of transfer amount to invest (1-100%)</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="fund-select">Target Fund</label>
+                    <select id="fund-select" required>
+                        <option value="">Select a fund...</option>
+                    </select>
+                    <span class="helper-text">Fund where the percentage will be automatically invested</span>
+                </div>
+
+                <button type="submit" class="add-rule-btn">Add Rule</button>
+            </form>
+        </div>
+
+        <!-- Existing Rules -->
+        <div class="rules-section">
+            <h2>Active Rules</h2>
+            <div id="rules-list">
+                <p class="no-rules">No auto-investment rules configured yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/javascript/auto-invest-settings.js"></script>
+</body>
+</html>

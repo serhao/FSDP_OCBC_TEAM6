@@ -52,6 +52,11 @@ document.getElementById('investments-btn').addEventListener('click', () => {
     window.location.href = '/html/user-investments.html';
 });
 
+// Auto-invest settings button
+document.getElementById('auto-invest-btn').addEventListener('click', () => {
+    window.location.href = '/auto-invest-settings';
+});
+
 // Logout button
 document.getElementById('logout-btn').addEventListener('click', async () => {
     try {

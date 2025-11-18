@@ -2,6 +2,16 @@ import { auth, db } from './firebase-config.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc, updateDoc, runTransaction, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// Fund prices for auto-investment (matching investments.js structure)
+const FUND_BASE_PRICES = {
+    'lion-global': 2.85,
+    'nikko-asia': 1.92,
+    'abf-singapore': 1.15,
+    'schroder-asian': 3.45,
+    'fsm-global': 2.10,
+    'eastspring-dragon': 1.78
+};
+
 let currentUser = null;
 
 // Check if user is logged in
@@ -86,27 +96,86 @@ document.getElementById('transfer-form').addEventListener('submit', async (e) =>
             return;
         }
         
+        // Get sender's phone number for auto-investment check
+        const senderDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        const senderPhone = senderDoc.data().phone;
+        
         // Perform transaction
         await runTransaction(db, async (transaction) => {
             const senderRef = doc(db, 'users', currentUser.uid);
             const recipientRef = doc(db, 'users', recipientId);
             
-            const senderDoc = await transaction.get(senderRef);
+            const senderDocTx = await transaction.get(senderRef);
             const recipientDocData = await transaction.get(recipientRef);
             
-            const senderBalance = senderDoc.exists() ? (senderDoc.data().balance || 0) : 0;
+            const senderBalance = senderDocTx.exists() ? (senderDocTx.data().balance || 0) : 0;
             const recipientBalance = recipientDocData.exists() ? (recipientDocData.data().balance || 0) : 0;
+            const recipientData = recipientDocData.data();
             
             if (senderBalance < amount) {
                 throw new Error('Insufficient funds');
             }
             
-            // Update balances
+            // Check for auto-investment rules
+            const autoInvestRules = recipientData.autoInvestmentRules || [];
+            const matchingRule = autoInvestRules.find(rule => rule.sourcePhone === senderPhone);
+            
+            let balanceAmount = amount;
+            let investmentAmount = 0;
+            let autoInvestApplied = false;
+            
+            if (matchingRule) {
+                // Calculate amounts
+                investmentAmount = (amount * matchingRule.percentage) / 100;
+                balanceAmount = amount - investmentAmount;
+                autoInvestApplied = true;
+                
+                // Get current fund price (using simulated price from investments)
+                const fundPrice = await getCurrentFundPrice(matchingRule.fundId);
+                const units = investmentAmount / fundPrice;
+                
+                // Update or create investment
+                const existingInvestments = recipientData.investments || [];
+                const existingInvestmentIndex = existingInvestments.findIndex(inv => inv.fundId === matchingRule.fundId);
+                
+                if (existingInvestmentIndex >= 0) {
+                    // Add to existing investment
+                    const existing = existingInvestments[existingInvestmentIndex];
+                    existingInvestments[existingInvestmentIndex] = {
+                        ...existing,
+                        units: existing.units + units,
+                        invested: existing.invested + investmentAmount,
+                        lastUpdated: new Date().toISOString()
+                    };
+                } else {
+                    // Create new investment
+                    existingInvestments.push({
+                        fundId: matchingRule.fundId,
+                        units: units,
+                        invested: investmentAmount,
+                        purchaseDate: new Date().toISOString(),
+                        lastUpdated: new Date().toISOString()
+                    });
+                }
+                
+                transaction.update(recipientRef, {
+                    balance: recipientBalance + balanceAmount,
+                    investments: existingInvestments
+                });
+            } else {
+                // No auto-investment rule, just add to balance
+                transaction.update(recipientRef, { balance: recipientBalance + amount });
+            }
+            
+            // Update sender balance
             transaction.update(senderRef, { balance: senderBalance - amount });
-            transaction.update(recipientRef, { balance: recipientBalance + amount });
+            
+            // Don't return auto-invest info to sender
+            return { autoInvestApplied: false };
+        }).then((result) => {
+            // Always show simple success message regardless of recipient's auto-invest rules
+            showSuccess(`Successfully transferred $${amount.toFixed(2)}`);
         });
-        
-        showSuccess(`Successfully transferred $${amount.toFixed(2)}`);
         
         // Reset form and reload balance
         document.getElementById('transfer-form').reset();
@@ -124,6 +193,14 @@ document.getElementById('transfer-form').addEventListener('submit', async (e) =>
         submitBtn.textContent = 'Transfer';
     }
 });
+
+// Get current fund price (simplified version for transfer auto-invest)
+async function getCurrentFundPrice(fundId) {
+    // Use base price with small random variation to simulate real-time pricing
+    const basePrice = FUND_BASE_PRICES[fundId] || 1.0;
+    const variation = (Math.random() - 0.5) * 0.04; // ±2% variation
+    return basePrice * (1 + variation);
+}
 
 // Show error message
 function showError(message) {

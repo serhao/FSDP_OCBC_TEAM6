@@ -42,6 +42,11 @@ app.get('/investments', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'investments.html'));
 });
 
+// Serve auto-investment settings page
+app.get('/auto-invest-settings', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'auto-invest-settings.html'));
+});
+
 // Serve investment page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'investment-learn-article.html'));
