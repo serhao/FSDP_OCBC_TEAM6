@@ -44,12 +44,12 @@ async function loadUserData(userId) {
 
 // Transfer button
 document.getElementById('transfer-btn').addEventListener('click', () => {
-    window.location.href = '/transfer';
+    window.location.href = '/html/transfer.html';
 });
 
 // Investments button
 document.getElementById('investments-btn').addEventListener('click', () => {
-    window.location.href = '/investments';
+    window.location.href = '/html/user-investments.html';
 });
 
 // Logout button
