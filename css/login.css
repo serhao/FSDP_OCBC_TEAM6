@@ -52,6 +52,10 @@ body {
     background-color: #d01820;
 }
 
+.signup-btn:hover {
+    background-color: #d01820;
+}
+
 /* Sub Navigation */
 .sub-navbar {
     background-color: #f5e6e6;

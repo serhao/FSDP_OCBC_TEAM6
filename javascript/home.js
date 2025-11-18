@@ -3,6 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionsList = document.getElementById('guidance-options-list');
     const dynamicImage = document.getElementById('dynamic-image');
 
+    // Make login button clickable
+    const loginButton = document.querySelector('.login-btn');
+
+    if (loginButton) {
+        loginButton.addEventListener('click', () => {
+            // Navigate the browser to the login page
+            window.location.href = './login.html';
+        });
+    } else {
+        console.error('Login button with ID "login-btn" not found.');
+    }
+
     // Function to set the image source from a link's data-attribute
     const setImageSource = (link) => {
         const imageSource = link.getAttribute('data-image');

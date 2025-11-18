@@ -2,6 +2,18 @@ import { auth, db } from './firebase-config.js';
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// Make login button clickable
+const loginButton = document.querySelector('.login-btn');
+
+if (loginButton) {
+    loginButton.addEventListener('click', () => {
+        // Navigate the browser to the login page
+        window.location.href = './login.html';
+    });
+} else {
+    console.error('Login button with ID "login-btn" not found.');
+}
+
 // Handle signup form submission
 document.getElementById('signup-form').addEventListener('submit', async (e) => {
     e.preventDefault();

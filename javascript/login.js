@@ -17,6 +17,18 @@ async function applyPendingRewards(userId) {
     }
 }
 
+    // Make sign up button clickable
+    const signupButton = document.querySelector('.signup-btn');
+
+    if (signupButton) {
+        signupButton.addEventListener('click', () => {
+            // Navigate the browser to the signup page
+            window.location.href = './signup.html';
+        });
+    } else {
+        console.error('Sign up button with ID "signup-btn" not found.');
+    }
+
 // Handle login form submission
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
