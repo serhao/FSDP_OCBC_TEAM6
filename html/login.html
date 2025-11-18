@@ -7,25 +7,43 @@
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="../images/ocbc-logo.png" alt="OCBC Bank" class="logo-img">
+                </div>
+                <button class="signup-btn">Sign Up</button>
+            </div>
+        </nav>
+        <nav class="sub-navbar">
+            <div class="sub-nav-container">
+                <a href="../html/home.html" class="nav-item active">Home</a>
+                <a href="accounts.html" class="nav-item">Accounts & Card</a>
+                <a href="../html/investment.html" class="nav-item">Investments</a>
+                <a href="help.html" class="nav-item">Help</a>
+                <a href="more.html" class="nav-item">More</a>
+            </div>
+        </nav>
+    </header>
     <div class="login-container">
         <div class="login-box">
-            <h1>OCBC Bank</h1>
-            <h2>Login</h2>
+            <h5>Secure site</h5>
+            <h1>Online Banking</h1>
             
             <form id="login-form">
                 <div class="form-group">
-                    <label for="access-code">Access Code</label>
                     <input 
                         type="text" 
                         id="access-code" 
                         name="access-code" 
                         required
                         autocomplete="username"
+                        placeholder="Access Code"
                     >
                 </div>
                 
                 <div class="form-group">
-                    <label for="pin">PIN</label>
                     <input 
                         type="password" 
                         id="pin" 
@@ -33,6 +51,7 @@
                         required
                         maxlength="6"
                         autocomplete="current-password"
+                        placeholder="PIN"
                     >
                 </div>
                 
