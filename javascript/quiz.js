@@ -113,8 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="score-display">${String(score).padStart(2, '0')}/${String(totalQuestions).padStart(2, '0')}</p>
 
                     <div>
-                        <p>You have earn ${score >= 4 ? score : 0} of OCBC reward points!</p>
-                        <p>Login to claim your reward points or sigun up if you are not an OCBC member yet!</p>
+                        <p>You have earned ${score >= 4 ? score : 0} of OCBC reward points!</p>
+                        <p>Login to claim your reward points or sign up if you are not an OCBC Member yet!</p>
                     </div>
 
                     <button class="restart-button">
