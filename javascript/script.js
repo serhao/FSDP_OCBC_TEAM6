@@ -2,6 +2,10 @@ function showQuiz() {
     document.getElementById("investment-quiz").style.display = "block";
 }
 
+function login() {
+    window.location.href = "/html/login.html";
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById("login-btn");
 
