@@ -71,6 +71,10 @@ let userBalance = 0;
 let userHoldings = [];
 let pricesLoaded = false;
 
+// OCBC broker fees
+const BROKER_FEE_PERCENT = 0.28; // 0.28% broker fee
+const MIN_BROKER_FEE = 25; // Minimum $25 fee
+
 // Fetch real-time prices from Alpha Vantage API (free tier)
 async function fetchRealPrices() {
     // Using Alpha Vantage free API - 25 requests per day limit
@@ -176,6 +180,7 @@ function displayHoldings() {
                 <p><strong>Invested:</strong> $${holding.invested.toFixed(2)}</p>
                 <p><strong>Current Value:</strong> $${currentValue.toFixed(2)}</p>
                 <p class="${profitClass}"><strong>Returns:</strong> $${profit.toFixed(2)} (${profitPercent}%)</p>
+                <button class="sell-btn" onclick="window.openSellModal('${holding.fundId}')">Sell/Withdraw</button>
             </div>
         `;
     });
@@ -248,10 +253,18 @@ document.querySelector('.close').addEventListener('click', () => {
     document.getElementById('investment-modal').style.display = 'none';
 });
 
+document.querySelector('.close-sell').addEventListener('click', () => {
+    document.getElementById('sell-modal').style.display = 'none';
+});
+
 window.addEventListener('click', (e) => {
     const modal = document.getElementById('investment-modal');
+    const sellModal = document.getElementById('sell-modal');
     if (e.target === modal) {
         modal.style.display = 'none';
+    }
+    if (e.target === sellModal) {
+        sellModal.style.display = 'none';
     }
 });
 
@@ -334,6 +347,138 @@ document.getElementById('invest-form').addEventListener('submit', async (e) => {
 // Back button
 document.getElementById('back-dashboard-btn').addEventListener('click', () => {
     window.location.href = '/dashboard';
+});
+
+// Open sell modal
+window.openSellModal = function(fundId) {
+    const holding = userHoldings.find(h => h.fundId === fundId);
+    const fund = FUNDS.find(f => f.id === fundId);
+    
+    if (!holding || !fund) return;
+    
+    const currentValue = holding.units * fund.currentPrice;
+    
+    document.getElementById('sell-fund-name').textContent = fund.name;
+    document.getElementById('sell-units').textContent = holding.units.toFixed(4);
+    document.getElementById('sell-price').textContent = fund.currentPrice.toFixed(2);
+    document.getElementById('sell-value').textContent = currentValue.toFixed(2);
+    
+    const sellModal = document.getElementById('sell-modal');
+    sellModal.style.display = 'block';
+    sellModal.dataset.fundId = fundId;
+    
+    // Update estimates on percentage change
+    document.getElementById('sell-percentage').addEventListener('input', updateSellEstimate);
+    updateSellEstimate();
+};
+
+// Update sell estimate
+function updateSellEstimate() {
+    const sellModal = document.getElementById('sell-modal');
+    const fundId = sellModal.dataset.fundId;
+    const holding = userHoldings.find(h => h.fundId === fundId);
+    const fund = FUNDS.find(f => f.id === fundId);
+    
+    if (!holding || !fund) return;
+    
+    const percentage = parseFloat(document.getElementById('sell-percentage').value) || 0;
+    const unitsToSell = (holding.units * percentage) / 100;
+    const grossProceeds = unitsToSell * fund.currentPrice;
+    
+    // Calculate broker fee (0.28%, minimum $25)
+    let brokerFee = grossProceeds * (BROKER_FEE_PERCENT / 100);
+    if (brokerFee < MIN_BROKER_FEE) {
+        brokerFee = MIN_BROKER_FEE;
+    }
+    
+    const netAmount = grossProceeds - brokerFee;
+    
+    document.getElementById('estimated-proceeds').textContent = grossProceeds.toFixed(2);
+    document.getElementById('estimated-fee').textContent = brokerFee.toFixed(2);
+    document.getElementById('net-amount').textContent = netAmount.toFixed(2);
+}
+
+// Handle sell transaction
+document.getElementById('sell-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const sellModal = document.getElementById('sell-modal');
+    const fundId = sellModal.dataset.fundId;
+    const percentage = parseFloat(document.getElementById('sell-percentage').value);
+    
+    if (percentage < 1 || percentage > 100) {
+        alert('Please enter a valid percentage (1-100)');
+        return;
+    }
+    
+    const holding = userHoldings.find(h => h.fundId === fundId);
+    const fund = FUNDS.find(f => f.id === fundId);
+    
+    if (!holding || !fund) return;
+    
+    const unitsToSell = (holding.units * percentage) / 100;
+    const grossProceeds = unitsToSell * fund.currentPrice;
+    
+    // Calculate broker fee
+    let brokerFee = grossProceeds * (BROKER_FEE_PERCENT / 100);
+    if (brokerFee < MIN_BROKER_FEE) {
+        brokerFee = MIN_BROKER_FEE;
+    }
+    
+    const netAmount = grossProceeds - brokerFee;
+    
+    const sellBtn = document.getElementById('sell-btn');
+    sellBtn.disabled = true;
+    sellBtn.textContent = 'Processing...';
+    
+    try {
+        await runTransaction(db, async (transaction) => {
+            const userRef = doc(db, 'users', currentUser.uid);
+            const userDoc = await transaction.get(userRef);
+            
+            const currentBalance = userDoc.data().balance || 0;
+            const currentInvestments = userDoc.data().investments || [];
+            
+            // Find the investment
+            const investmentIndex = currentInvestments.findIndex(inv => inv.fundId === fundId);
+            
+            if (investmentIndex === -1) {
+                throw new Error('Investment not found');
+            }
+            
+            const investment = currentInvestments[investmentIndex];
+            
+            // Calculate proportional invested amount to deduct
+            const proportionalInvested = (investment.invested * percentage) / 100;
+            
+            if (percentage >= 100) {
+                // Sell all - remove investment
+                currentInvestments.splice(investmentIndex, 1);
+            } else {
+                // Partial sell - update units and invested amount
+                currentInvestments[investmentIndex].units -= unitsToSell;
+                currentInvestments[investmentIndex].invested -= proportionalInvested;
+            }
+            
+            // Update user document
+            transaction.update(userRef, {
+                balance: currentBalance + netAmount,
+                investments: currentInvestments
+            });
+        });
+        
+        alert(`Successfully sold ${percentage}% of holdings!\nGross Proceeds: $${grossProceeds.toFixed(2)}\nBroker Fee: $${brokerFee.toFixed(2)}\nNet Amount: $${netAmount.toFixed(2)}`);
+        sellModal.style.display = 'none';
+        document.getElementById('sell-form').reset();
+        await loadUserData();
+        
+    } catch (error) {
+        console.error('Sell error:', error);
+        alert('Sale failed: ' + error.message);
+    } finally {
+        sellBtn.disabled = false;
+        sellBtn.textContent = 'Sell & Withdraw';
+    }
 });
 
 // Initialize

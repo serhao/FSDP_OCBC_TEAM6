@@ -142,6 +142,23 @@ h1 {
     color: #c00;
 }
 
+.sell-btn {
+    width: 100%;
+    background-color: #f90;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.sell-btn:hover {
+    background-color: #e68a00;
+}
+
 .available-funds h3 {
     color: #333;
     margin-bottom: 20px;
@@ -338,4 +355,50 @@ h1 {
 .invest-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.sell-btn-submit {
+    width: 100%;
+    background-color: #f90;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.sell-btn-submit:hover {
+    background-color: #e68a00;
+}
+
+.sell-btn-submit:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.helper-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.fee-breakdown {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.fee-breakdown p {
+    margin-bottom: 8px;
+}
+
+.fee-breakdown .total {
+    font-size: 18px;
+    color: #ED1C24;
+    border-top: 2px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
 }

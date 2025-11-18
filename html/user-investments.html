@@ -65,6 +65,33 @@
         </div>
     </div>
 
+    <!-- Sell Modal -->
+    <div id="sell-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-sell">&times;</span>
+            <h2 id="sell-fund-name"></h2>
+            <div class="fund-details">
+                <p><strong>Units Owned:</strong> <span id="sell-units"></span></p>
+                <p><strong>Current Price:</strong> $<span id="sell-price"></span></p>
+                <p><strong>Current Value:</strong> $<span id="sell-value"></span></p>
+                <p><strong>OCBC Broker Fee:</strong> 0.28% (Min $25)</p>
+            </div>
+            <form id="sell-form">
+                <div class="form-group">
+                    <label for="sell-percentage">Sell Percentage (%)</label>
+                    <input type="number" id="sell-percentage" min="1" max="100" value="100" required>
+                    <p class="helper-text">Enter percentage of holdings to sell (1-100%)</p>
+                </div>
+                <div class="fee-breakdown">
+                    <p><strong>Estimated Proceeds:</strong> $<span id="estimated-proceeds">0.00</span></p>
+                    <p><strong>Broker Fee:</strong> $<span id="estimated-fee">0.00</span></p>
+                    <p class="total"><strong>Net Amount:</strong> $<span id="net-amount">0.00</span></p>
+                </div>
+                <button type="submit" id="sell-btn" class="sell-btn-submit">Sell & Withdraw</button>
+            </form>
+        </div>
+    </div>
+
     <script type="module" src="../javascript/investments.js"></script>
 </body>
 </html>
