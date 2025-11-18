@@ -57,9 +57,9 @@ document.getElementById('logout-btn').addEventListener('click', async () => {
     try {
         await signOut(auth);
         sessionStorage.clear();
-        window.location.href = '/';
+        window.location.href = './home.html';
     } catch (error) {
         console.error('Logout error:', error);
-        alert('Error logging out');
+        console.error('Error logging out',  error.message);
     }
 });
