@@ -61,7 +61,7 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 0;
 }
 
