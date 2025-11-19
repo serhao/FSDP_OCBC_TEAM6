@@ -55,6 +55,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         sessionStorage.setItem('userAccessCode', accessCode);
         sessionStorage.setItem('userId', user.Reward_Points);
 
+        localStorage.setItem('isLoggedIn', 'true');
+
         await applyPendingRewards(user.uid);
         
         // Redirect to dashboard or home page

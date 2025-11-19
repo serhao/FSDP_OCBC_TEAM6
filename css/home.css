@@ -35,7 +35,12 @@ body {
     width: auto;
 }
 
-.login-btn {
+.nav-auth-buttons {
+    display: flex;
+    gap: 10px; 
+}
+
+.auth-nav-btn {
     background-color: #ED1C24;
     color: white;
     border: none;
@@ -47,7 +52,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.login-btn:hover {
+.auth-nav-btn:hover {
     background-color: #d01820;
 }
 

@@ -31,18 +31,25 @@ h1 {
     font-size: 24px;
 }
 
-.logout-btn {
+.nav-auth-buttons {
+    display: flex;
+    gap: 10px; 
+}
+
+.auth-nav-btn {
     background-color: #ED1C24;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 0.7rem 2.5rem;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.3s;
 }
 
-.logout-btn:hover {
-    background-color: #c91219;
+.auth-nav-btn:hover {
+    background-color: #d01820;
 }
 
 .dashboard-content {
