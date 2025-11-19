@@ -57,14 +57,21 @@ document.getElementById('auto-invest-btn').addEventListener('click', () => {
     window.location.href = '/auto-invest-settings';
 });
 
-// Logout button
+// Logout button - FIXED VERSION
 document.getElementById('logout-btn').addEventListener('click', async () => {
     try {
-        await signOut(auth);
+        // Clear ALL storage first
         sessionStorage.clear();
-        window.location.href = './home.html';
+        localStorage.clear(); // This clears the 'isLoggedIn' flag that home.js checks
+        
+        // Sign out from Firebase
+        await signOut(auth);
+        
+        // Redirect to home page using replace to prevent back button issues
+        window.location.replace('./home.html');
+        
     } catch (error) {
         console.error('Logout error:', error);
-        console.error('Error logging out',  error.message);
+        alert('Error logging out: ' + error.message);
     }
 });
