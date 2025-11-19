@@ -9,13 +9,15 @@ body {
     background-color: #f5f5f5;
 }
 
+/* --- PAGE SPACING TO AVOID NAVBAR OVERLAP --- */
 .transfer-container {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 40px auto 60px; /* space below header, above footer */
     padding: 20px;
 }
 
-header {
+/* --- LOCAL PAGE HEADER, RENAMED TO AVOID NAVBAR CONFLICT --- */
+.transfer-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,7 +28,7 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-h1 {
+.transfer-header h1 {
     color: #ED1C24;
     font-size: 24px;
 }
@@ -45,6 +47,7 @@ h1 {
     background-color: #555;
 }
 
+/* MAIN CONTENT CARD */
 .transfer-content {
     background: white;
     padding: 30px;
@@ -62,7 +65,7 @@ h1 {
     color: #333;
 }
 
-/* AI Assistant Styles */
+/* AI ASSISTANT */
 .ai-assistant-section {
     margin-bottom: 30px;
     border: 2px solid #ED1C24;
@@ -106,7 +109,6 @@ h1 {
     max-width: 80%;
     word-wrap: break-word;
     line-height: 1.4;
-    display: block;
 }
 
 .user-message {
@@ -125,41 +127,12 @@ h1 {
     border-bottom-left-radius: 5px;
 }
 
-.message-content {
-    margin: 0;
-}
-
-.confirmation-message {
-    background-color: #fff3cd;
-    border: 2px solid #ffc107;
-    color: #856404;
-    font-weight: 600;
-}
-
 .chat-input-container {
     display: flex;
     padding: 15px;
     background: white;
     border-top: 1px solid #e0e0e0;
     gap: 10px;
-    align-items: center;
-}
-
-#mic-btn {
-    background-color: #ED1C24;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: background-color 0.2s;
-    white-space: nowrap;
-}
-
-#mic-btn:hover {
-    background-color: #c91219;
 }
 
 #chat-input {
@@ -184,54 +157,13 @@ h1 {
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
-    transition: background-color 0.2s;
 }
 
 .send-btn:hover {
     background-color: #c91219;
 }
 
-.send-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.typing-indicator {
-    background-color: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 15px;
-    padding: 12px 15px;
-    max-width: 80px;
-    align-self: flex-start;
-}
-
-.typing-indicator span {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: #999;
-    border-radius: 50%;
-    margin-right: 5px;
-    animation: typing 1.4s infinite;
-}
-
-.typing-indicator span:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.typing-indicator span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes typing {
-    0%, 60%, 100% {
-        transform: translateY(0);
-    }
-    30% {
-        transform: translateY(-10px);
-    }
-}
-
+/* DIVIDER */
 .divider {
     text-align: center;
     margin: 30px 0;
@@ -251,12 +183,11 @@ h1 {
 .divider span {
     background: white;
     padding: 0 15px;
-    position: relative;
     color: #999;
     font-size: 12px;
-    font-weight: 600;
 }
 
+/* FORM */
 .form-group {
     margin-bottom: 20px;
 }
@@ -277,7 +208,6 @@ input {
 }
 
 input:focus {
-    outline: none;
     border-color: #ED1C24;
 }
 
@@ -289,8 +219,8 @@ input:focus {
     padding: 14px;
     font-size: 16px;
     font-weight: 600;
-    cursor: pointer;
     border-radius: 4px;
+    cursor: pointer;
     margin-top: 10px;
 }
 
@@ -298,27 +228,7 @@ input:focus {
     background-color: #c91219;
 }
 
-.transfer-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* Manual form messages */
-.form-message {
-    padding: 12px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    display: none;
-}
-
-.form-message.error {
-    background-color: #fee;
-    color: #c00;
-    border: 1px solid #fcc;
-}
-
-.form-message.success {
-    background-color: #efe;
-    color: #0a0;
-    border: 1px solid #cfc;
+/* FOOTER SPACING FIX */
+footer {
+    margin-top: 80px !important;
 }
