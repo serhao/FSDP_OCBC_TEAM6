@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import chatRouter from './api/chat.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.static(__dirname));
+app.use(chatRouter);
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/javascript', express.static(path.join(__dirname, 'javascript')));
 app.use('/html', express.static(path.join(__dirname, 'html')));

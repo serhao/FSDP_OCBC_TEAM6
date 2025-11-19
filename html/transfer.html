@@ -17,6 +17,36 @@
             <div class="balance-display">
                 <p>Your Balance: <span id="current-balance">$0.00</span></p>
             </div>
+
+            <!-- AI Assistant Chat Interface -->
+            <div class="ai-assistant-section">
+                <div class="ai-header">
+                    <h3>💬 AI Transfer Assistant</h3>
+                    <p class="ai-subtitle">Type or click "Speak" to tell me who you want to send money to!</p>
+                </div>
+                <div id="chat-container" class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                Hi! I'm your transfer assistant. You can say things like "Send $50 to John" or "Transfer money to +65 9123 4567". How can I help you today?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input 
+                            type="text" 
+                            id="chat-input" 
+                            placeholder="Type your message here..."
+                            autocomplete="off"
+                        >
+                        <button id="send-chat-btn" class="send-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider">
+                <span>OR USE MANUAL FORM</span>
+            </div>
             
             <form id="transfer-form">
                 <div class="form-group">
